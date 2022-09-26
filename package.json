@@ -4,7 +4,10 @@
   "description": "",
   "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preinstall": "node build/npm/preinstall.js",
+    "postinstall": "node build/npm/postinstall.js",
+    "server": "yaserver --root ./ --port 9999",
+    "compile": "node --max_old_space_size=4095 ./node_modules/gulp/bin/gulp.js compile-client"
   },
   "repository": {
     "type": "git",
@@ -16,14 +19,23 @@
     "url": "https://github.com/nnnlife/vscode-skel/issues"
   },
   "homepage": "https://github.com/nnnlife/vscode-skel#readme",
+  "dependencies": {
+      "@stomp/stompjs": "file:/home/nnnlife/src/stompjs"
+  },
   "devDependencies": {
+    "@types/rimraf": "^3.0.2",
     "eslint": "^8.24.0",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-jsdoc": "^39.3.6",
     "eslint-plugin-local": "^1.0.0",
     "gulp": "^4.0.2",
+    "gulp-bom": "^3.0.0",
+    "gulp-cli": "^2.3.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "rimraf": "^3.0.2",
     "tsec": "^0.2.6",
     "typescript": "^4.8.3",
-    "yaserver": "^0.4.0"
+    "event-stream": "3.3.4",
+    "yaserver": "^0.3.0"
   }
 }

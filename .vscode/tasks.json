@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "server",
+            "isBackground": true,
+			"label": "Run yaserver",
+            "problemMatcher": {
+				"pattern": {
+					"regexp": ""
+				},
+				"background": {
+					"beginsPattern": ".*",
+					"endsPattern": ".*Listening at .*"
+				}
+			},
+			"presentation": {
+				"reveal": "never"
+			}
+		},
+    ]
+}
