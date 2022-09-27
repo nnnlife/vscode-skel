@@ -11,7 +11,7 @@
 					"regexp": ""
 				},
 				"background": {
-					"beginsPattern": ".*",
+					"beginsPattern": "yarn.*",
 					"endsPattern": ".*Listening at .*"
 				}
 			},
