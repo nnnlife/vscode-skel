@@ -28,13 +28,14 @@ export class SearchWidget extends Widget {
 
 	private renderSearchInput(parent: HTMLElement): void {
 		const searchInputContainer = dom.append(parent, dom.$('.search-container.input-box'));
+		const findInput = new FindInput(searchInputContainer, undefined, { label: 'search' });
+		findInput.setValue('Hello');
 	}
 
 	private render(container: HTMLElement): void {
 		this.domNode = dom.append(container, dom.$('.search-widget'));
 		this.domNode.style.position = 'relative';
 		this.renderSearchInput(this.domNode);
-
 	}
 
 	private async submitSearch(triggeredOnType = false, delay: number = 0): Promise<void> {

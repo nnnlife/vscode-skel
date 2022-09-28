@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/nnnlife/vscode-skel#readme",
   "dependencies": {
-    "@stomp/stompjs": "file:/home/nnnlife/src/stompjs"
+    "@stomp/stompjs": "file:/home/nnnlife/src/stompjs",
+    "gulp-postcss": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.7.23",

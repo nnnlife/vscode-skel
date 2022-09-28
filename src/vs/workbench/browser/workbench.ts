@@ -3,17 +3,23 @@ import { InstantiationService } from "vs/platform/instantiation/common/instantia
 import { ServiceCollection } from "vs/platform/instantiation/common/serviceCollection";
 import { EventType, addDisposableListener, getClientArea, Dimension, position, size, IDimension, isAncestorUsingFlowTo, computeScreenAwareSize } from 'vs/base/browser/dom';
 import { PlayGround } from 'vs/workbench/browser/playground';
+import { GridView, Sizing } from 'vs/base/browser/ui/grid/gridview';
 
 export class Workbench {
     readonly container = document.createElement('div');
-    readonly playground: PlayGround;
+    private _dimension!: IDimension;
+    readonly gridView: GridView;
+    playground: PlayGround;
 
     constructor(
         private parent: HTMLElement,
         private readonly serviceCollection: ServiceCollection,
     ) {
         console.log('client area', this.getClientArea());
+        this.gridView = new GridView();
+        this.container.prepend(this.gridView.element);
         this.playground = new PlayGround(this.container);
+        this.gridView.addView(this.playground, Sizing.Distribute, [0]);
     }
 
     startup(): IInstantiationService {
@@ -30,7 +36,7 @@ export class Workbench {
         return instantiationService;
     }
     restore(): void {
-        this.playground.openViewlet();
+        // this.playground.openViewlet();
     }
 
     private renderWorkbench(instantiationService: IInstantiationService): void {
@@ -38,6 +44,10 @@ export class Workbench {
     }
 
     layout(): void {
+        this._dimension = this.getClientArea();
+        position(this.container, 0, 0, 0, 0, 'relative');
+        size(this.container, this._dimension.width, this._dimension.height);
+        this.gridView.layout(this._dimension.width, this._dimension.height);
     }
 
     private initServices(serviceCollection: ServiceCollection): IInstantiationService {
@@ -53,7 +63,7 @@ export class Workbench {
     protected createWorkbenchLayout(): void {
         // originally create gridview and attach each parts(activity, sidebar, etc..) to gridview
         // and finally call this.container.prepend(workbenchGrid.element)
-        this.container.prepend(this.playground.element);
+        // this.container.prepend(this.playground.element);
     }
 
     protected initLayout(accessor: ServicesAccessor): void {
